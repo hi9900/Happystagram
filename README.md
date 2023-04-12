@@ -1,8 +1,74 @@
 # 인스타그램 클론코딩
 
+### 2304
+
+- 이미지 파일 추가 기능 구현
+
 ### 230412
 
-- 게시글 생성 CREATE
+- 게시글 생성 CREATE 구현
+
+  - `posts/urls.py` create 경로 추가
+
+    - 엔드포인트 `create/`, 경로 이름 create
+
+  - `posts/views.py` create 함수 생성
+
+    - POST 요청, form 유효성 검사 통과 시 게시글 생성 후
+
+    - 메인화면(posts:index) 이동
+
+  - `posts/create.html` 생성
+
+    - `base.html`을 상속받고, form 태그로 POST 요청을 전송
+
+  - `base.html` 상단 네비바의 `NewPost`를 누르면 게시글 작성 화면(posts:create)로 이동
+
+  - 게시글 조회 READ 구현: 메인화면에서 게시글 조회
+
+    - `posts/views.py`: index 함수 수정
+    
+      - Post 모델 import
+
+      - queryAPI를 사용해서 Post에 저장된 게시글의 정보를 context로 전달
+
+    - `posts/post.html`: 게시글 조회 화면 담당
+
+      - for 문을 통해 post 조회
+
+    - `posts/index.html` post.html을 include 받아 게시글 조회
+
+    > ### 게시글 조회 화면을 `index.html`에 작성하지 않는 이유?
+    >
+    > 코드의 재사용성을 위해
+    >
+    > 한 html 안에 많은 내용이 들어가면 가독성이 떨어지고, 똑같은 일을 계속해서 적어야 하므로 비효율적
+    >
+    > 때문에 자주 사용할 영역을 따로 만들어두어 include 받아오기
+    >
+    > +추가과제
+    >
+    > create, update, signup에 비슷한 생김새의 form 태그를 사용하는 데, 
+    >
+    > form 태그 안의 내용물을 구성하는 것은 view에서 넘겨준 정보이다.
+    >
+    > include를 사용하여 form을 구현한 html을 가져와서 쓰면 한 줄로 form 태그를 여러 곳에서 사용 가능하다.
+    >
+    > form.html을 include 해서 사용해 보기
+
+  - 게시글 삭제 DELETE 구현
+
+    - `posts/urls.py`에 게시글 삭제에 관한 경로 추가
+
+      - 엔드포인트: `pk/delete/`, 경로 이름: delete
+
+    - `posts/views.py`: delete 함수 생성
+
+      - post 요청일 때, 요청된 pk의 게시글 삭제
+
+      - 삭제 후 메인화면으로 이동
+
+    - `posts/post.html`: form을 이용해 삭제 버튼 추가
 
 ### 230411
 
@@ -39,7 +105,4 @@
   - `base.html` 을 상속
 
 - `base.html` 상단 네비게이션 바의 Home을 누르면 메인화면으로 이동하는 경로 설정
-
-
-
 
