@@ -1,0 +1,12 @@
+<!-- 게시글 조회 -->
+<div class="">
+  {% for post in posts %}
+    <div class="card">
+      <p>{{ post.content }}</p>
+      <form action="{% url 'posts:delete' post.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="DELETE" class="btn btn-danger">
+      </form>
+    </div>
+  {% endfor %}
+</div>
