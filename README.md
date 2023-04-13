@@ -1,8 +1,48 @@
 # 인스타그램 클론코딩
 
-### 2304
+### 230413
 
-- 이미지 파일 추가 기능 구현
+- 이미지 파일 추가 및 조회 기능 구현
+
+  - 이미지 업로드를 위한 전처리
+
+    - 가상환경에 Pillow 라이브러리 설치 후 freeze
+
+    - `settings.py` 설정 추가
+
+      ```python
+      MEDIA_ROOT = BASE_DIR / 'media'
+      MEDIA_URL = '/media/'
+      ```
+    
+    - `instapjt/urls.py`
+
+      ```python
+      urlpatterns = [...]
+      + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+      ```
+  
+  - `models.py` 이미지 파일 필드 추가 후 **마이그레이션**
+
+  - `posts/views.py` create 함수에 request.FILES 추가
+
+  - `posts/create.html` 이미지 파일을 입력받기 위해 form 태그 수정
+
+    `<form enctype="multipart/form-data">`
+
+  - `posts/posts.html` 메인화면에서 이미지를 출력 (이미지가 없을 시 출력하지 않음)
+
+    처음에는 이미지가 없을 시 alt가 출력되는 것으로 생각 후 조회 for문 안에 img 태그 작성
+
+    `<img src="{{ post.image.url }}" alt="">`
+
+    모든 이미지가 출력되지 않아서 if 문으로 이미지가 존재할 시 출력되게 함 -> why?
+
+    ```django
+    {% if post.image %}
+      <img src="{{ post.image.url }}" alt="">
+    {% endif %}
+    ```
 
 ### 230412
 
